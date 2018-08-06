@@ -3,33 +3,37 @@
 # Installing Kibana
 #
 
-# Install Kibana 
+# Install Kibana
+
+# APT - Advanced Package Tool, or APT, is a free software user interface that
+# works with core libraries to handle the installation and removal of
+# software on Debian, Ubuntu and other Linux distributions
 
 - name: Install Kibana with apt
   apt:
    name: kibana
    update_cache: yes
- 
+
 # Configurations
 
 - name: Updating the config file to allow outside access
   lineinfile:
-   destfile: /etc/kibana/kibana.yml
-   regexp: 'server.host:'
-   line: 'server.host: 0.0.0.0'
+   destfile: /etc/kibana/kibana.yml # path of the file
+   regexp: 'server.host:' # The regular expression to look for in every line of the file
+   line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
 
 - name: Defining server port
   lineinfile:
    destfile: /etc/kibana/kibana.yml
    regexp: 'server.port:'
    line: 'server.port: 5601'
-    
+
 - name: Defining Elasticsearch URL
   lineinfile:
    destfile: /etc/kibana/kibana.yml
    regexp: 'elasticsearch.url:'
    line: 'elasticsearch.url: "http://localhost:9200"'
-   
+
 # Starting Kibana
 
 - name: Starting Kibana
