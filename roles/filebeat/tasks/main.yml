@@ -3,7 +3,7 @@
 # Installing Filebeat
 #
 
-# Install Filebeat 
+# Install Filebeat
 
 - name: Install Filebeat with apt
   apt:
