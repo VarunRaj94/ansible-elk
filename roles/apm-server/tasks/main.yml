@@ -16,23 +16,17 @@
 
 # Configurations
 
-- name: Updating the config file to allow outside access
+- name: Updating the config file for Kibana
   lineinfile:
    destfile: /etc/apm-server/apm-server.yml # path of the file
-   regexp: 'server.host:' # The regular expression to look for in every line of the file
-   line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
+   regexp: 'setup.kibana:' # The regular expression to look for in every line of the file
+   line: 'host: "localhost:5601"'  # The line to insert/replace into the file
 
-- name: Defining server port
+- name: Defining server port for Elasticsearch
   lineinfile:
    destfile: /etc/apm-server/apm-server.yml
-   regexp: 'server.port:'
-   line: 'server.port: 8200'
-
-- name: Defining Elasticsearch URL
-  lineinfile:
-   destfile: /etc/apm-server/apm-server.yml
-   regexp: 'elasticsearch.url:'
-   line: 'elasticsearch.url: "http://localhost:9200"'
+   regexp: 'output.elasticsearch:'
+   line: 'hosts: ["localhost:9200"]'
 
 # Starting Kibana
 
