@@ -1,0 +1,42 @@
+---
+#
+# Installing apm-server
+#
+
+# Install apm-server
+
+# APT - Advanced Package Tool, or APT, is a free software user interface that
+# works with core libraries to handle the installation and removal of
+# software on Debian, Ubuntu and other Linux distributions
+
+- name: Install apm with apt
+  apt:
+   name: apm-server
+   update_cache: yes
+
+# Configurations
+
+- name: Updating the config file to allow outside access
+  lineinfile:
+   destfile: /etc/apm-server/apm-server.yml # path of the file
+   regexp: 'server.host:' # The regular expression to look for in every line of the file
+   line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
+
+- name: Defining server port
+  lineinfile:
+   destfile: /etc/apm-server/apm-server.yml
+   regexp: 'server.port:'
+   line: 'server.port: 8200'
+
+- name: Defining Elasticsearch URL
+  lineinfile:
+   destfile: /etc/apm-server/apm-server.yml
+   regexp: 'elasticsearch.url:'
+   line: 'elasticsearch.url: "http://localhost:9200"'
+
+# Starting Kibana
+
+- name: Starting apm-server
+  service:
+   name: apm-server
+   state: started
