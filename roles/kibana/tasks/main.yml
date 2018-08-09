@@ -46,6 +46,21 @@
    regexp: 'elasticsearch.url:'
    line: 'elasticsearch.url: "http://localhost:9200"'
 
+- name: Defining server port
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'elasticsearch.username:'
+   line: 'elasticsearch.username: "kibana"'
+
+ - name: Defining server port
+   lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: 'elasticsearch.password:'
+    line: 'elasticsearch.password: "kibana"'
+
+   #elasticsearch.username: "user"
+   #elasticsearch.password: "pass"
+
 # Starting Kibana
 
 - name: Starting Kibana
