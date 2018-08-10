@@ -27,7 +27,7 @@
   lineinfile:
    destfile: /etc/kibana/kibana.yml # path of the file
    regexp: 'server.host:' # The regular expression to look for in every line of the file
-   line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
+   line: 'server.host: localhost'  # The line to insert/replace into the file
 
 - name: Defining server port
   lineinfile:
