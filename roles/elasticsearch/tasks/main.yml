@@ -40,8 +40,8 @@
    regexp: 'http.port:'
    line: 'http.port: 9200'
 
-- name: Install xpack
-  shell: 'cd /usr/share/elasticsearch && sudo bin/elasticsearch-plugin install x-pack'
+# - name: Install xpack
+#   shell: 'cd /usr/share/elasticsearch && sudo bin/elasticsearch-plugin install x-pack'
 
 - name: Disable xpack
   lineinfile:
