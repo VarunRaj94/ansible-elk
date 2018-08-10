@@ -59,7 +59,7 @@
 - name: Starting Elasticsearch
   service:
    name: elasticsearch
-   state: restarted
+   state: started
 
 - name: Start Process - Elasticsearch
   shell: sudo update-rc.d elasticsearch defaults 95 10
