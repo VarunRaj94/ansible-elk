@@ -53,10 +53,10 @@
    line: 'elasticsearch.username: "kibana"'
 
 - name: Defining server port
- lineinfile:
-  destfile: /etc/kibana/kibana.yml
-  regexp: 'elasticsearch.password:'
-  line: 'elasticsearch.password: "kibana"'
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'elasticsearch.password:'
+   line: 'elasticsearch.password: "kibana"'
 
    #elasticsearch.username: "user"
    #elasticsearch.password: "pass"
