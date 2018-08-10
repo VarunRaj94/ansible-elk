@@ -5,26 +5,17 @@
 
 # Add Elasticsearch apt key
 
-- name: Add Elasticsearch apt key
-  apt_key:
-   url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
-   state: present
+- name: echo
+  shell: 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
 
-# Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
+- name: update
+  shell: 'echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list'
 
-- name: Adding Elasticsearch repo
-  apt_repository:
-   repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
-   state: present
+- name: Install
+  shell: 'sudo apt-get update'
 
-# Installing Elasticsearch
-
-- name: Install Elasticsearch
-  apt:
-   name: elasticsearch
-   update_cache: yes
-
-# Update Elasticsearch config file to allow access (to secure Elasticsearch, bind to 'localhost').
+- name: Install
+  shell: 'sudo apt-get -y install elasticsearch'
 
 - name: Updating the config file to allow outside access
   lineinfile:
@@ -32,34 +23,67 @@
    regexp: 'network.host:'
    line: 'network.host: 0.0.0.0'
 
-# Update Elasticsearch port in config file
+- name: defaults
+  shell: 'sudo service elasticsearch restart'
 
-- name: Updating the port in config file
-  lineinfile:
-   destfile: /etc/elasticsearch/elasticsearch.yml
-   regexp: 'http.port:'
-   line: 'http.port: 9200'
+- name: start
+  shell: 'sudo update-rc.d elasticsearch defaults 95 10'
 
-# - name: Install xpack
-#   shell: 'cd /usr/share/elasticsearch && sudo bin/elasticsearch-plugin install x-pack'
-
-- name: Disable xpack
-  lineinfile:
-   destfile: /etc/elasticsearch/elasticsearch.yml
-   regexp: 'xpack.security.enabled:'
-   line: 'xpack.security.enabled: false'
-
-# - name: Enable xpack collection
+# - name: Add Elasticsearch apt key
+#   apt_key:
+#    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+#    state: present
+#
+# # Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
+#
+# - name: Adding Elasticsearch repo
+#   apt_repository:
+#    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+#    state: present
+#
+# # Installing Elasticsearch
+#
+# - name: Install Elasticsearch
+#   apt:
+#    name: elasticsearch
+#    update_cache: yes
+#
+# # Update Elasticsearch config file to allow access (to secure Elasticsearch, bind to 'localhost').
+#
+# - name: Updating the config file to allow outside access
 #   lineinfile:
 #    destfile: /etc/elasticsearch/elasticsearch.yml
-#    regexp: 'xpack.monitoring.collection.enabled:'
-#    line: 'xpack.monitoring.collection.enabled: true'
-
-# Start Elasticsearch
-- name: Starting Elasticsearch
-  service:
-   name: elasticsearch
-   state: started
-
-- name: Start Process - Elasticsearch
-  shell: sudo update-rc.d elasticsearch defaults 95 10
+#    regexp: 'network.host:'
+#    line: 'network.host: 0.0.0.0'
+#
+# # Update Elasticsearch port in config file
+#
+# - name: Updating the port in config file
+#   lineinfile:
+#    destfile: /etc/elasticsearch/elasticsearch.yml
+#    regexp: 'http.port:'
+#    line: 'http.port: 9200'
+#
+# # - name: Install xpack
+# #   shell: 'cd /usr/share/elasticsearch && sudo bin/elasticsearch-plugin install x-pack'
+#
+# - name: Disable xpack
+#   lineinfile:
+#    destfile: /etc/elasticsearch/elasticsearch.yml
+#    regexp: 'xpack.security.enabled:'
+#    line: 'xpack.security.enabled: false'
+#
+# # - name: Enable xpack collection
+# #   lineinfile:
+# #    destfile: /etc/elasticsearch/elasticsearch.yml
+# #    regexp: 'xpack.monitoring.collection.enabled:'
+# #    line: 'xpack.monitoring.collection.enabled: true'
+#
+# # Start Elasticsearch
+# - name: Starting Elasticsearch
+#   service:
+#    name: elasticsearch
+#    state: started
+#
+# - name: Start Process - Elasticsearch
+#   shell: sudo update-rc.d elasticsearch defaults 95 10
