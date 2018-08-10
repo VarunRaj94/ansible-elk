@@ -30,7 +30,7 @@
   lineinfile:
    destfile: /etc/elasticsearch/elasticsearch.yml
    regexp: 'network.host:'
-   line: 'network.host: localhost'
+   line: 'network.host: 0.0.0.0'
 
 # Update Elasticsearch port in config file
 
@@ -59,4 +59,4 @@
 - name: Starting Elasticsearch
   service:
    name: elasticsearch
-   state: started
+   state: restarted
