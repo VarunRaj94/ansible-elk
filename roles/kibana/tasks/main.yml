@@ -41,6 +41,12 @@
    regexp: 'elasticsearch.url:'
    line: 'elasticsearch.url: "http://localhost:9200"'
 
+- name: Disable xpack
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'xpack.security.enabled:'
+   line: 'xpack.security.enabled: false'
+
 # - name: Defining server port
 #   lineinfile:
 #    destfile: /etc/kibana/kibana.yml
