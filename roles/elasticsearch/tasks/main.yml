@@ -49,6 +49,12 @@
    regexp: 'xpack.security.enabled:'
    line: 'xpack.security.enabled: false'
 
+- name: Enable xpack collection
+  lineinfile:
+   destfile: /etc/elasticsearch/elasticsearch.yml
+   regexp: 'xpack.monitoring.collection.enabled:'
+   line: 'xpack.monitoring.collection.enabled: true'
+
 # Start Elasticsearch
 - name: Starting Elasticsearch
   service:

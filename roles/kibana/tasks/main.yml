@@ -41,8 +41,8 @@
    regexp: 'elasticsearch.url:'
    line: 'elasticsearch.url: "http://localhost:9200"'
 
-- name: Install xpack
-  shell: 'cd /usr/share/kibana && sudo bin/kibana-plugin install x-pack'
+# - name: Install xpack
+#   shell: 'cd /usr/share/kibana && sudo bin/kibana-plugin install x-pack'
 
 - name: Disable xpack
   lineinfile:
@@ -50,13 +50,13 @@
    regexp: 'xpack.security.enabled:'
    line: 'xpack.security.enabled: false'
 
-- name: Defining server port
+- name: Defining server username
   lineinfile:
    destfile: /etc/kibana/kibana.yml
    regexp: 'elasticsearch.username:'
    line: '#elasticsearch.username: "kibana"'
 
-- name: Defining server port
+- name: Defining server password
   lineinfile:
    destfile: /etc/kibana/kibana.yml
    regexp: 'elasticsearch.password:'
