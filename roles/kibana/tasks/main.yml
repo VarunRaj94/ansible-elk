@@ -11,10 +11,10 @@
 
 # Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
 
-# - name: Downloading Kibana
-#   apt:
-#    deb: "https://artifacts.elastic.co/downloads/kibana/kibana-6.3.2-amd64.deb"
-#    state: present
+- name: Downloading Kibana
+  apt:
+   deb: "https://artifacts.elastic.co/downloads/kibana/kibana-6.3.2-amd64.deb"
+   state: present
 
 - name: Install Kibana with apt
   apt:
@@ -34,12 +34,6 @@
    destfile: /etc/kibana/kibana.yml
    regexp: 'server.port:'
    line: 'server.port: 5601'
-
-- name: Defining Elasticsearch URL
-  lineinfile:
-   destfile: /etc/kibana/kibana.yml
-   regexp: 'elasticsearch.url:'
-   line: 'elasticsearch.url: "http://localhost:9200"'
 
 # - name: Install xpack
 #   shell: 'cd /usr/share/kibana && sudo bin/kibana-plugin install x-pack'
@@ -61,13 +55,21 @@
 #    destfile: /etc/kibana/kibana.yml
 #    regexp: 'elasticsearch.password:'
 #    line: '#elasticsearch.password: "kibana"'
+#
+# - name: Defining kibana_version
+#   lineinfile:
+#    destfile: /etc/kibana/kibana.yml
+#    regexp: 'kibana_version:'
+#    line: 'kibana_version: "4.6"'
 
    #elasticsearch.username: "user"
    #elasticsearch.password: "pass"
+- name: Start Process - Kibana
+  shell: sudo update-rc.d kibana defaults 96 9
 
 # Starting Kibana
 
 - name: Starting Kibana
   service:
    name: kibana
-   state: restarted
+   state: started

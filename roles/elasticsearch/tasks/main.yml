@@ -14,7 +14,7 @@
 
 - name: Adding Elasticsearch repo
   apt_repository:
-   repo: deb https://artifacts.elastic.co/packages/5.x/apt stable main
+   repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
    state: present
 
 # Installing Elasticsearch
@@ -49,14 +49,17 @@
    regexp: 'xpack.security.enabled:'
    line: 'xpack.security.enabled: false'
 
-- name: Enable xpack collection
-  lineinfile:
-   destfile: /etc/elasticsearch/elasticsearch.yml
-   regexp: 'xpack.monitoring.collection.enabled:'
-   line: 'xpack.monitoring.collection.enabled: true'
+# - name: Enable xpack collection
+#   lineinfile:
+#    destfile: /etc/elasticsearch/elasticsearch.yml
+#    regexp: 'xpack.monitoring.collection.enabled:'
+#    line: 'xpack.monitoring.collection.enabled: true'
 
 # Start Elasticsearch
 - name: Starting Elasticsearch
   service:
    name: elasticsearch
    state: restarted
+
+- name: Start Process - Elasticsearch
+  shell: sudo update-rc.d elasticsearch defaults 95 10
