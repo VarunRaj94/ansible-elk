@@ -5,6 +5,17 @@
 
 # Install Kibana
 
+# APT - Advanced Package Tool, or APT, is a free software user interface that
+# works with core libraries to handle the installation and removal of
+# software on Debian, Ubuntu and other Linux distributions
+
+# Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
+
+# - name: Downloading Kibana
+#   apt:
+#    deb: "https://artifacts.elastic.co/downloads/kibana/kibana-6.3.2-amd64.deb"
+#    state: present
+
 - name: Install Kibana with apt
   apt:
    name: kibana
@@ -14,9 +25,9 @@
 
 - name: Updating the config file to allow outside access
   lineinfile:
-   destfile: /etc/kibana/kibana.yml
-   regexp: 'server.host:'
-   line: 'server.host: 0.0.0.0'
+   destfile: /etc/kibana/kibana.yml # path of the file
+   regexp: 'server.host:' # The regular expression to look for in every line of the file
+   line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
 
 - name: Defining server port
   lineinfile:
@@ -29,6 +40,21 @@
    destfile: /etc/kibana/kibana.yml
    regexp: 'elasticsearch.url:'
    line: 'elasticsearch.url: "http://localhost:9200"'
+
+# - name: Defining server port
+#   lineinfile:
+#    destfile: /etc/kibana/kibana.yml
+#    regexp: 'elasticsearch.username:'
+#    line: 'elasticsearch.username: "kibana"'
+#
+#  - name: Defining server port
+#    lineinfile:
+#     destfile: /etc/kibana/kibana.yml
+#     regexp: 'elasticsearch.password:'
+#     line: 'elasticsearch.password: "kibana"'
+
+   #elasticsearch.username: "user"
+   #elasticsearch.password: "pass"
 
 # Starting Kibana
 
