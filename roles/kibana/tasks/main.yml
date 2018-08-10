@@ -41,6 +41,9 @@
    regexp: 'elasticsearch.url:'
    line: 'elasticsearch.url: "http://localhost:9200"'
 
+- name: Install xpack
+  shell: 'cd /usr/share/kibana && sudo bin/kibana-plugin install x-pack'
+
 - name: Disable xpack
   lineinfile:
    destfile: /etc/kibana/kibana.yml
