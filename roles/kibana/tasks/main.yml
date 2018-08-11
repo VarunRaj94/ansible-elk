@@ -12,8 +12,8 @@
 # Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
 
 
-- name: echo
-  shell: 'echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list'
+# - name: echo
+#   shell: 'echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list'
 
 - name: update
   shell: 'sudo apt-get update'
