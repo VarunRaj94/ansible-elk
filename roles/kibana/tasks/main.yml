@@ -13,17 +13,17 @@
 
 
 - name: echo
-  shell: 'echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-4.5.x.list'
+  shell: 'echo "deb http://packages.elastic.co/kibana/6/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-6.x.list'
 
-- name: update
-  shell: 'sudo apt-get update'
+# - name: update
+#   shell: 'sudo apt-get update'
 
 - name: Install
   shell: 'sudo apt-get -y install kibana'
 
 - name: Updating the config file to allow outside access
   lineinfile:
-   destfile: /etc/kibana/kibana.yml # path of the file
+   destfile: /opt/kibana/config/kibana.yml # path of the file
    regexp: 'server.host:' # The regular expression to look for in every line of the file
    line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
 
