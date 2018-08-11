@@ -15,7 +15,7 @@
   shell: 'sudo apt-get update'
 
 - name: Install
-  shell: 'sudo apt-get -y install elasticsearch'
+  shell: 'sudo apt-get -y install --reinstall elasticsearch'
 
 - name: Updating the config file to allow outside access
   lineinfile:
