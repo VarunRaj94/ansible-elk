@@ -13,7 +13,7 @@
 
 
 - name: echo
-  shell: 'echo "deb http://packages.elastic.co/kibana/6/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-6.x.list'
+  shell: 'echo "deb http://packages.elastic.co/kibana/6.3/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-6.3.x.list'
 
 # - name: update
 #   shell: 'sudo apt-get update'
