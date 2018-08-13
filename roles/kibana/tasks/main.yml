@@ -11,35 +11,35 @@
 
 # Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
 
-# - name: echo
-#   shell: 'wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
-#
-#
-# - name: echo
-#   shell: 'echo "deb http://packages.elastic.co/kibana/6.3.2/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-6.3.2.x.list'
-#
-# # - name: update
-# #   shell: 'sudo apt-get update'
-#
-# # - name: Install Kibana with apt
-# #   apt:
-# #    name: kibana
-# #    update_cache: yes
-#
-# - name: Install
-#   shell: 'sudo apt-get -y install kibana'
-#
-# - name: Updating the config file to allow outside access
-#   lineinfile:
-#    destfile: /opt/kibana/config/kibana.yml # path of the file
-#    regexp: 'server.host:' # The regular expression to look for in every line of the file
-#    line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
-#
-# - name: defaults
-#   shell: 'sudo update-rc.d kibana defaults 96 9'
-#
-# - name: start
-#   shell: 'sudo service kibana start'
+- name: echo
+  shell: 'wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
+
+
+- name: echo
+  shell: 'echo "deb http://packages.elastic.co/kibana/6.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-6.x.list'
+
+- name: update
+  shell: 'sudo apt-get update'
+
+# - name: Install Kibana with apt
+#   apt:
+#    name: kibana
+#    update_cache: yes
+
+- name: Install
+  shell: 'sudo apt-get -y install kibana'
+
+- name: Updating the config file to allow outside access
+  lineinfile:
+   destfile: /opt/kibana/config/kibana.yml # path of the file
+   regexp: 'server.host:' # The regular expression to look for in every line of the file
+   line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
+
+- name: defaults
+  shell: 'sudo update-rc.d kibana defaults 96 9'
+
+- name: start
+  shell: 'sudo service kibana start'
 
 
 
@@ -52,72 +52,76 @@
 
 # echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-4.5.x.list
 
-- name: Add Elasticsearch apt key
-  apt_key:
-   url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
-   state: present
 
-# Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
 
-- name: Adding Elasticsearch repo
-  apt_repository:
-   repo: deb http://packages.elastic.co/kibana/6.x/debian stable main
-   state: present
 
-- name: Install Kibana with apt
-  apt:
-   name: kibana
-   update_cache: no
 
-# Configurations
-
-- name: Updating the config file to allow outside access
-  lineinfile:
-   destfile: /etc/kibana/kibana.yml # path of the file
-   regexp: 'server.host:' # The regular expression to look for in every line of the file
-   line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
-
-# - name: Defining server port
-#   lineinfile:
-#    destfile: /etc/kibana/kibana.yml
-#    regexp: 'server.port:'
-#    line: 'server.port: 5601'
-
-# - name: Install xpack
-#   shell: 'cd /usr/share/kibana && sudo bin/kibana-plugin install x-pack'
-
-# - name: Disable xpack
-#   lineinfile:
-#    destfile: /etc/kibana/kibana.yml
-#    regexp: 'xpack.security.enabled:'
-#    line: 'xpack.security.enabled: false'
-
-# - name: Defining server username
-#   lineinfile:
-#    destfile: /etc/kibana/kibana.yml
-#    regexp: 'elasticsearch.username:'
-#    line: '#elasticsearch.username: "kibana"'
+# - name: Add Elasticsearch apt key
+#   apt_key:
+#    url: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+#    state: present
 #
-# - name: Defining server password
-#   lineinfile:
-#    destfile: /etc/kibana/kibana.yml
-#    regexp: 'elasticsearch.password:'
-#    line: '#elasticsearch.password: "kibana"'
+# # Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
 #
-# - name: Defining kibana_version
+# - name: Adding Elasticsearch repo
+#   apt_repository:
+#    repo: deb http://packages.elastic.co/kibana/6.x/debian stable main
+#    state: present
+#
+# - name: Install Kibana with apt
+#   apt:
+#    name: kibana
+#    update_cache: no
+#
+# # Configurations
+#
+# - name: Updating the config file to allow outside access
 #   lineinfile:
-#    destfile: /etc/kibana/kibana.yml
-#    regexp: 'kibana_version:'
-#    line: 'kibana_version: "4.6"'
-
-   #elasticsearch.username: "user"
-   #elasticsearch.password: "pass"
-- name: Start Process - Kibana
-  shell: sudo update-rc.d kibana defaults 96 9
-
-# Starting Kibana
-
-- name: Starting Kibana
-  service:
-   name: kibana
-   state: started
+#    destfile: /etc/kibana/kibana.yml # path of the file
+#    regexp: 'server.host:' # The regular expression to look for in every line of the file
+#    line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
+#
+# # - name: Defining server port
+# #   lineinfile:
+# #    destfile: /etc/kibana/kibana.yml
+# #    regexp: 'server.port:'
+# #    line: 'server.port: 5601'
+#
+# # - name: Install xpack
+# #   shell: 'cd /usr/share/kibana && sudo bin/kibana-plugin install x-pack'
+#
+# # - name: Disable xpack
+# #   lineinfile:
+# #    destfile: /etc/kibana/kibana.yml
+# #    regexp: 'xpack.security.enabled:'
+# #    line: 'xpack.security.enabled: false'
+#
+# # - name: Defining server username
+# #   lineinfile:
+# #    destfile: /etc/kibana/kibana.yml
+# #    regexp: 'elasticsearch.username:'
+# #    line: '#elasticsearch.username: "kibana"'
+# #
+# # - name: Defining server password
+# #   lineinfile:
+# #    destfile: /etc/kibana/kibana.yml
+# #    regexp: 'elasticsearch.password:'
+# #    line: '#elasticsearch.password: "kibana"'
+# #
+# # - name: Defining kibana_version
+# #   lineinfile:
+# #    destfile: /etc/kibana/kibana.yml
+# #    regexp: 'kibana_version:'
+# #    line: 'kibana_version: "4.6"'
+#
+#    #elasticsearch.username: "user"
+#    #elasticsearch.password: "pass"
+# - name: Start Process - Kibana
+#   shell: sudo update-rc.d kibana defaults 96 9
+#
+# # Starting Kibana
+#
+# - name: Starting Kibana
+#   service:
+#    name: kibana
+#    state: started
