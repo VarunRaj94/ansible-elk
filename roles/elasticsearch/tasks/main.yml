@@ -12,7 +12,7 @@
 #   shell: 'sudo apt-get update'
 
 - name: update
-  shell: 'echo "deb http://packages.elastic.co/elasticsearch/6.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-6.x.list'
+  shell: 'echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list'
 
 #- name: Install
 #  shell: 'sudo apt-get update'
