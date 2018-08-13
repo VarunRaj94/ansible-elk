@@ -16,9 +16,12 @@
 
 #- name: Install
 #  shell: 'sudo apt-get update'
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
 
 - name: Install
-  shell: 'sudo apt-get install elasticsearch'
+  shell: 'sudo apt-get -y install elasticsearch'
 
 
 - name: Updating the config file to allow outside access
