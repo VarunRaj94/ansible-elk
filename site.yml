@@ -7,7 +7,7 @@
   gather_facts: yes
 
   roles:
-#  - { role: java }
+  - { role: java }
   - { role: elasticsearch }
 #  - { role: kibana }
 #  - { role: apm-server }
