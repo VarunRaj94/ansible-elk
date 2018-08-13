@@ -20,15 +20,15 @@
 #   apt:
 #     update_cache: yes
 #
-# - name: Install
-#   shell: 'sudo apt-get -y install elasticsearch'
+- name: Install
+  shell: 'sudo apt-get -y install elasticsearch'
 
 # Installing Elasticsearch
 
-- name: Install Elasticsearch
-  apt:
-   name: elasticsearch
-   update_cache: yes
+# - name: Install Elasticsearch
+#   apt:
+#    name: elasticsearch
+#    update_cache: yes
 
 
 - name: Updating the config file to allow outside access
