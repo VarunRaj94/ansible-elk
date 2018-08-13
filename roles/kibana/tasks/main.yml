@@ -11,17 +11,15 @@
 
 # Add the Elasticsearch apt repo. For versions 6 of the stack - use '6.x-prerelease':
 
+- name: echo
+  shell: 'wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
 
-# - name: echo
-#   shell: 'echo "deb http://packages.elastic.co/kibana/6.3/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-6.3.x.list'
+
+- name: echo
+  shell: 'echo "deb http://packages.elastic.co/kibana/6.3.2/debian stable main" | sudo tee -a /etc/apt/sources.list.d/kibana-6.3.2.x.list'
 
 # - name: update
 #   shell: 'sudo apt-get update'
-
-- name: Downloading Kibana
-  apt:
-   deb: "https://artifacts.elastic.co/downloads/kibana/kibana-6.3.2-amd64.deb"
-   state: present
 
 # - name: Install Kibana with apt
 #   apt:
