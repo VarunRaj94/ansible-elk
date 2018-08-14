@@ -14,6 +14,9 @@
     - 'nodejs'
     - 'npm'
 
+- name: Setting Elasticsearch to run on boot
+  shell: 'npm install elastic-apm-node --save'
+
 - name: Success Message
   debug:
     msg: "Installed npm and nodejs"

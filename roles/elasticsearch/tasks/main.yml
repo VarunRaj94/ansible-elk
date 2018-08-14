@@ -32,7 +32,7 @@
    state: restarted
 
 - name: Setting Elasticsearch to run on boot
-  shell: sudo update-rc.d elasticsearch defaults 95 10
+  shell: 'sudo update-rc.d elasticsearch defaults 95 10'
 
 - name: Success Message
   debug:
