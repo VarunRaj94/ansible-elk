@@ -40,7 +40,7 @@
 
 - name: Updating the config file to allow outside access
   lineinfile:
-   destfile: /opt/kibana/config/kibana.yml # path of the file
+   destfile: /etc/kibana/kibana.yml # path of the file
    regexp: 'server.host:' # The regular expression to look for in every line of the file
    line: 'server.host: 0.0.0.0'  # The line to insert/replace into the file
 
