@@ -15,7 +15,7 @@
 - name: update
   shell: 'echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-6.x.list'
 
-- name: Install Elasticsearch
+- name: Install apm-server
   apt:
    name: apm-server
    update_cache: yes
@@ -37,3 +37,6 @@
 
 - name: defaults
   shell: 'sudo update-rc.d apm-server defaults 95 10'
+
+- name: Installing Node.js dependency
+  shell: 'npm install elastic-apm-node --save'
