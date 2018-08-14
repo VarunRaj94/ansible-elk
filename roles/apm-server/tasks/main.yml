@@ -12,25 +12,13 @@
 - name: echo
   shell: 'wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -'
 
-# - name: Installing
-#   shell: 'sudo apt-get update'
-
 - name: update
   shell: 'echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-6.x.list'
 
-- name: update
-  shell: 'sudo apt-get update'
-
-  #setup.dashboards.enabled: false
-    #host: "localhost:5601
-
-# - name: Install Kibana with apt
-#   apt:
-#    name: kibana
-#    update_cache: yes
-
-- name: Install
-  shell: 'sudo apt-get -y install apm-server'
+- name: Install Elasticsearch
+  apt:
+   name: apm-server
+   update_cache: yes
 
 - name: Updating the config file to allow outside access
   lineinfile:
@@ -44,8 +32,8 @@
    regexp: 'setup.dashboards.enabled:' # The regular expression to look for in every line of the file
    line: 'setup.dashboards.enabled: true'  # The line to insert/replace into the file
 
-- name: defaults
-  shell: 'sudo update-rc.d apm-server defaults 95 10'
-
 - name: start
   shell: 'sudo service apm-server start'
+
+- name: defaults
+  shell: 'sudo update-rc.d apm-server defaults 95 10'
