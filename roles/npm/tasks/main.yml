@@ -1,0 +1,19 @@
+---
+#
+# Installing npm
+#
+
+# Installing npm
+
+- name: Install Dependency
+  apt:
+   name: "{{ item }}"
+   state: present
+   update_cache: yes
+  with_items:
+    - 'nodejs'
+    - 'npm'
+
+- name: Success Message
+  debug:
+    msg: "Installed npm and nodejs"

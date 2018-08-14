@@ -40,3 +40,7 @@
 
 - name: Installing Node.js dependency
   shell: 'npm install elastic-apm-node --save'
+
+- name: Success Message
+  debug:
+    msg: "apm-server running sucessfully"

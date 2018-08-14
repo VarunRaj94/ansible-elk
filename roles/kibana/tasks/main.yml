@@ -39,3 +39,7 @@
 
 - name: Setting Kibana to run on boot
   shell: sudo update-rc.d kibana defaults 96 9
+
+- name: Success Message
+  debug:
+    msg: "Kibana running sucessfully"
