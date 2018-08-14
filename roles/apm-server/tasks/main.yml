@@ -21,6 +21,9 @@
 - name: update
   shell: 'sudo apt-get update'
 
+  #setup.dashboards.enabled: false
+    #host: "localhost:5601
+
 # - name: Install Kibana with apt
 #   apt:
 #    name: kibana
@@ -28,6 +31,12 @@
 
 - name: Install
   shell: 'sudo apt-get -y install apm-server'
+
+- name: Updating the config file to allow outside access
+  lineinfile:
+   destfile: /etc/apm-server/apm-server.yml # path of the file
+   regexp: '#host: "localhost:5601"' # The regular expression to look for in every line of the file
+   line: 'host: "localhost:5601"'  # The line to insert/replace into the file
 
 - name: defaults
   shell: 'sudo update-rc.d apm-server defaults 95 10'
